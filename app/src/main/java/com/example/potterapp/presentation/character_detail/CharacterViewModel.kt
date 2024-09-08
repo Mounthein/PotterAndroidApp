@@ -3,6 +3,7 @@ package com.example.potterapp.presentation.character_detail
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.potterapp.common.Constants
 import com.example.potterapp.common.Resource
 import com.example.potterapp.data.remote.dto.CharacterDetailDTO
 import com.example.potterapp.data.repository.CharacterRepositoryImpl
@@ -26,9 +27,11 @@ class CharacterViewModel @Inject constructor(
     private val _state = MutableStateFlow(CharacterState())
     val state: StateFlow<CharacterState> = _state.asStateFlow()
 
-    private val characterId: String = ""
+    private var characterId: String = ""
     init {
-
+        savedStateHandle.get<String>(Constants.PARA_CHARACTER_ID)?.let { charId ->
+            characterId = charId
+        }
     }
 
     private fun getCharacterFromApi(): Flow<Resource<CharacterDetailDTO>> = flow {

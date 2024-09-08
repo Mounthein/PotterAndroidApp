@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PotterApp</string>
+    <string name="detailed_sceen">Detailed Screen</string>
 </resources>

@@ -1,7 +1,9 @@
 package com.example.potterapp.domain.model
 
 import com.example.potterapp.data.remote.dto.WandDTO
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class CharacterDetail(
     val actor: String,
     val alive: Boolean,

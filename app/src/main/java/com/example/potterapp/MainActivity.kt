@@ -20,6 +20,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
+import com.example.potterapp.common.ScreenRoutes
+import com.example.potterapp.domain.model.CharacterDetail
+import com.example.potterapp.domain.model.CharacterSimple
+import com.example.potterapp.presentation.character_detail.CharacterDetailScreen
 import com.example.potterapp.presentation.character_list.components.CharacterListScreen
 import com.example.potterapp.ui.theme.PotterAppTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,7 +36,18 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             PotterAppTheme {
-                CharacterListScreen()
+                val navController = rememberNavController()
+                NavHost(
+                    navController = navController,
+                    startDestination = ScreenRoutes.Start
+                ){
+                    composable(route = ScreenRoutes.Start.name){
+                        CharacterListScreen(navController = navController)
+                    }
+                    composable(route = ScreenRoutes.Detail.name + "/{characterId}") {
+                        CharacterDetailScreen(navController = navController)
+                    }
+                }
                 }
             }
         }
